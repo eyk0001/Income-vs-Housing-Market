@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Price vs Wage Growth</title>
+	
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+	
+	
+</head>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ahom&display=swap" rel="stylesheet">
+
+<style>
+	.navbar {
+	  background: #2c3e50;
+	  padding: 10px 20px;
+	}
+
+	.nav-row {
+	  display: flex;
+	  margin: 8px 0;
+	}
+	
+	.nav-row:not(.top-row) {
+	  justify-content: center;
+	  gap: 120px;
+	}
+
+	.top-row {
+	  align-items: center;
+	  padding: 0 40px;
+	}
+
+	.nav-left {
+	  display: flex;
+	  gap: 40px;
+	}
+	
+	.nav-center {
+	  position: absolute;
+	  left: 50%;
+	  transform: translateX(-50%);
+	}
+
+	.navbar a {
+	  color: white;
+	  text-decoration: none;
+	  font-size: 32px;
+	  font-weight: 600;
+	}
+	
+	.nav-row:last-child a {
+	  font-size: 16px;   /* adjust to whatever size you want */
+	}
+
+	.navbar a:hover {
+	  text-decoration: underline;
+	}
+	h1 {
+	  text-align: center;
+	  font-size: 96px;
+	}
+	h2 {
+	  text-align: center;
+	  font-size: 48px;
+	}
+    body {
+      font-family: "Noto Serif Ahom", sans-serif;
+      margin: 0px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+	#clock {
+	    margin-left: auto;
+	    color: white;
+	    font-size: 40px;
+	    font-weight: bold;
+	    font-family: monospace;
+	}
+	.search-box {
+	position: relative;
+	}
+	#navSearch {
+	  padding: 6px 12px;
+	  font-size: 16px;
+	  border-radius: 6px;
+	  border: none;
+	  outline: none;
+	  	}
+	#searchResults {
+	  position: absolute;
+	  top: 110%;
+	  left: 0;
+	  width: 100%;
+	  background: white;
+	  border-radius: 6px;
+	  overflow: hidden;
+	  display: none;
+	  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+	  z-index: 999;
+	}
+
+	.resultItem {
+	  padding: 10px;
+	  cursor: pointer;
+	  color: black;
+	}
+
+	.resultItem:hover {
+	  background: #eee;
+	}
+	}
+    input, select, button {
+      margin: 5px 0;
+      padding: 6px;
+    }
+	.split {
+	  display: flex;
+	  gap: 40px;
+	  padding: 40px;
+	}
+
+	.left {
+	  flex: 1;
+	}
+
+	.right {
+	  flex: 1;
+	}
+ </style>
+<body>
+		<nav class="navbar">
+
+	<div class="nav-row top-row">
+
+		<div class="nav-left">
+		  <a href="file:///C:/Users/Administrator/Documents/2026/Computing%201+2/AT1/Income%20vs%20housing%20market.html">Home</a>
+		</div>
+
+		<div class="nav-center">
+		  <input type="text" id="navSearch" placeholder="Search Bar">
+		  <div id="searchResults"></div>
+		</div>
+
+		<div id="clock"></div>
+
+	</div>
+
+	  <div class="nav-row">
+		<a href="file:///C:/Users/Administrator/Documents/2026/Computing%201+2/AT1/Price%20Growth%20vs%20Wage%20Growth.html">Price vs Wage Growth</a>
+		<a href="file:///C:/Users/Administrator/Documents/2026/Computing%201+2/AT1/Can%20You%20Afford%20to%20Live%20Here.html">Can You Afford to Live Here</a>
+		<a href="#">Subpage3</a>
+		<a href="#">Subpage4</a>
+	  </div>
+
+	</nav>
+	<h1>Price vs Wage Growth</h1>
+    <canvas id="growthChart"></canvas>
+    </section>
+	
+		<h2>State Averages</h2>
+	<section class="split">
+	  <div class="left">
+		<p>
+		  Text Stuff.
+		</p>
+	  </div>
+
+	  <div class="right">
+		<canvas id="growthChart"></canvas>
+	  </div>
+	</section>
+
+	<script>
+	function updateClock() {
+	  const now = new Date();
+
+	  const hours = String(now.getHours()).padStart(2, '0');
+	  const minutes = String(now.getMinutes()).padStart(2, '0');
+	  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+	  document.getElementById("clock").textContent =
+		`${hours}:${minutes}:${seconds}`;
+	}
+
+	setInterval(updateClock, 1000);
+	updateClock();
+
+</script>
+  
+</body>
+</html>
