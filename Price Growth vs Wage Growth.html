@@ -181,6 +181,47 @@
 	</section>
 
 	<script>
+	const pages = {
+	  "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
+	  "Price Growth vs Wage Growth": "https://eyk0001.github.io/Income-vs-Housing-Market/Price%20Growth%20vs%20Wage%20Growth.html",
+	  "Can You Afford to Live Here": "https://eyk0001.github.io/Income-vs-Housing-Market/Can%20You%20Afford%20to%20Live%20Here.html",
+	  "subpage4": "subpage4.html"
+	};
+	
+	const searchInput = document.getElementById("navSearch");
+	const resultsBox = document.getElementById("searchResults");
+
+	searchInput.addEventListener("input", () => {
+	  const query = searchInput.value.toLowerCase();
+	  resultsBox.innerHTML = "";
+
+	  if (!query) {
+		resultsBox.style.display = "none";
+		return;
+	  }
+
+	  Object.keys(pages).forEach(page => {
+		if (page.toLowerCase().includes(query)) {
+		  const item = document.createElement("div");
+		  item.className = "resultItem";
+		  item.textContent = page;
+
+		  item.onclick = () => {
+			window.location.href = pages[page];
+		  };
+
+		  resultsBox.appendChild(item);
+		}
+	  });
+
+	  resultsBox.style.display = "block";
+	});
+
+	document.addEventListener("click", (e) => {
+	  if (!e.target.closest(".search-box")) {
+		resultsBox.style.display = "none";
+	  }
+	});
 	function updateClock() {
 	  const now = new Date();
 
@@ -200,5 +241,6 @@
 </body>
 
 </html>
+
 
 
