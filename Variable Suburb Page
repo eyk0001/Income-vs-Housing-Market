@@ -8,6 +8,8 @@
     rel="stylesheet"
     href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></scripts>
 	
 	
 </head>
@@ -211,7 +213,89 @@
 	updateClock();
 
 </script>
-  
+
+
+<label>Select Suburbs (Ctrl/Cmd + Click):</label><br>
+<select id="suburbSelect" multiple size="8" style="width:300px;"></select>
+
+<canvas id="myChart"></canvas>
+
+<script>
+let chart;
+
+d3.csv("medHousePrice.csv").then(function(data) {
+
+    const columns = data.columns;
+    const quarters = columns.slice(1);
+    const select = document.getElementById("suburbSelect");
+
+    // Populate dropdown
+    data.forEach(row => {
+        const option = document.createElement("option");
+        option.value = row.Suburb;
+        option.textContent = row.Suburb;
+        select.appendChild(option);
+    });
+
+    // Create empty chart initially
+    chart = new Chart(document.getElementById("myChart"), {
+        type: "line",
+        data: {
+            labels: quarters,
+            datasets: []
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "right"
+                }
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function(value) {
+                            return "$" + value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Update chart when selection changes
+    select.addEventListener("change", function() {
+
+        const selectedSuburbs = Array.from(this.selectedOptions)
+                                     .map(option => option.value);
+
+        const newDatasets = selectedSuburbs.map((suburb, index) => {
+            const row = data.find(d => d.Suburb === suburb);
+
+            return {
+                label: suburb,
+                data: quarters.map(q => +row[q]),
+                borderColor: getColor(index),
+                backgroundColor: getColor(index),
+                fill: false,
+                tension: 0.2
+            };
+        });
+
+        chart.data.datasets = newDatasets;
+        chart.update();
+    });
+
+});
+
+// Generate distinct colours using golden angle
+function getColor(index) {
+    const hue = (index * 137.5) % 360;
+    return `hsl(${hue}, 70%, 50%)`;
+}
+</script>
+
 </body>
 
 </html>
