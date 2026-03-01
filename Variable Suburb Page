@@ -152,13 +152,8 @@
 	  </div>
 
 	</nav>
-	<h1>Income vs housing market</h1>
+	<h1>/Suburb Name [Variable]/</h1>
 	
-	<section id="map-section">
-    <h2>Suburb Affordability Map</h2>
-	<div id="map"></div>
-	</section>
-
 	<script>
 	const pages = {
 	  "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
@@ -215,87 +210,6 @@
 	setInterval(updateClock, 1000);
 	updateClock();
 
-
-  const victoriaBounds = [
-    [-39.2, 140.9],
-    [-33.9, 150.0]
-  ];
-  const map = L.map('map',{
-    maxBounds: victoriaBounds,
-    maxBoundsViscosity: 1.0,
-	minZoom: 8,
-	maxZoom: 15
-  }).setView([-37.8, 145], 10);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
-  
- 
-  const arcgisUrl =
-    "https://services-ap1.arcgis.com/ypkPEy1AmwPKGNNv/arcgis/rest/services/Taxation_Statistics_22_23/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson";
-
-const suburbData = {
-  "Melbourne": { house: 950000, unit: 520000, rent: 550 },
-  "Geelong": { house: 720000, unit: 420000, rent: 420 },
-  "Ballarat": { house: 550000, unit: 350000, rent: 360 },
-  "Bendigo": { house: 530000, unit: 330000, rent: 340 }
-};
-
-  fetch(arcgisUrl)
-    .then((response) => response.json())
-    .then((geojsonData) => {
-      L.geoJSON(geojsonData, {
-        style: (feature) => {
-          const value = feature.properties.Tot_Person_Income;
-          const color =
-            value > 80000
-              ? "#800026"
-              : value > 60000
-              ? "#BD0026"
-              : value > 40000
-              ? "#E31A1C"
-              : value > 20000
-              ? "#FC4E2A"
-              : "#FD8D3C";
-
-          return {
-            color: color,
-            weight: 1,
-            fillOpacity: 0.6
-          };
-        },
-        onEachFeature: (feature, layer) => {
-          const props = feature.properties;
-          const name = props.Area_Name || "No Data ";
-		  const extra = suburbData[name];
-
-let popupHtml;
-
-if (extra) {
-  popupHtml = `
-    <strong>${name}</strong><br>
-    Median income: $${props.Tot_Person_Income ?? "N/A"}<br>
-    House price: $${extra.house.toLocaleString()}<br>
-    Unit price: $${extra.unit.toLocaleString()}<br>
-    Weekly rent: $${extra.rent}
-  `;
-} else {
-  popupHtml = `
-    <strong>${name}</strong><br>
-    Median income: $${props.Tot_Person_Income ?? "N/A"}<br>
-    No housing data available
-  `;
-}
-
-layer.bindPopup(popupHtml);
-
-        }
-      }).addTo(map);
-    })
-    .catch((err) => {
-      console.error("Error loading ArcGIS GeoJSON:", err);
-    });
 </script>
   
 </body>
