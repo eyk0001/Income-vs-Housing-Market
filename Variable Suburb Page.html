@@ -216,13 +216,16 @@
 </script>
 
 
-<map>
 <label>Select Suburbs (Ctrl/Cmd + Click):</label><br>
 <select id="suburbSelect" multiple size="8" style="width:300px;"></select>
 
 <canvas id="myChart"></canvas>
 
 <script>
+	var can = document.querySelector('myChart');
+  can.style.position = 'absolute';
+  can.style.top = "100px";
+  can.style.left = "100px";
 let chart;
 
 d3.csv("medHousePrice.csv").then(function(data) {
@@ -298,6 +301,6 @@ function getColor(index) {
 }
 </script>
 
-</map>
+
 </body>
 </html>
