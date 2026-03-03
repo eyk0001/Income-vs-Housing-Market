@@ -215,7 +215,7 @@
 
 </script>
 
-
+<section>
 <label>Select Suburbs (Ctrl/Cmd + Click):</label><br>
 <select id="suburbSelect" multiple size="8" style="width:300px;"></select>
 
@@ -250,7 +250,8 @@ d3.csv("medHousePrice.csv").then(function(data) {
             plugins: {
                 legend: {
                     display: true,
-                    position: "right"
+                    position: "center",
+					margin: "400px"
                 }
             },
             scales: {
@@ -296,7 +297,7 @@ function getColor(index) {
     return `hsl(${hue}, 70%, 50%)`;
 }
 </script>
-
+</section>
 
 </body>
 </html>
