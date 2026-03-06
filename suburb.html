@@ -253,20 +253,20 @@ document.addEventListener("click", (e) => {
 	updateClock();
 
 </script>
-
+<div id="suburbSelector">
+	<label>Select Suburbs (Ctrl/Cmd + Click):</label><br>
+	<select id="suburbSelect" multiple size="8" style="width:100px;"></select>
+</div>
+	
 <section class="split">
 	<div class="left">
-		<div id="suburbSelector">
-		<label>Select Suburbs (Ctrl/Cmd + Click):</label><br>
-		<select id="suburbSelect" multiple size="8" style="width:100px;"></select>
-		</div>
+		<canvas id="myChart"></canvas>
 	</div>
 
 	<div class="right">
 		<p>Text of some sort</p>
 	</div>
 </section>
-<canvas id="myChart"></canvas>
 
 <script>
 let chart;
