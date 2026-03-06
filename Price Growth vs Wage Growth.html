@@ -199,48 +199,71 @@
 	  </div>
 	</section>
 
-	<script>
-	const pages = {
-	  "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
-	  "Price Growth vs Wage Growth": "https://eyk0001.github.io/Income-vs-Housing-Market/Price%20Growth%20vs%20Wage%20Growth.html",
-	  "Can You Afford to Live Here": "https://eyk0001.github.io/Income-vs-Housing-Market/Can%20You%20Afford%20to%20Live%20Here.html",
-	  "subpage4": "subpage4.html"
-	};
-	
-	const searchInput = document.getElementById("navSearch");
-	const resultsBox = document.getElementById("searchResults");
+<script src="https://d3js.org/d3.v7.min.js"></script>
 
-	searchInput.addEventListener("input", () => {
-	  const query = searchInput.value.toLowerCase();
-	  resultsBox.innerHTML = "";
+<script>
+const pages = {
+  "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
+  "Price Growth vs Wage Growth": "https://eyk0001.github.io/Income-vs-Housing-Market/Price%20Growth%20vs%20Wage%20Growth.html",
+  "Can You Afford to Live Here": "https://eyk0001.github.io/Income-vs-Housing-Market/Can%20You%20Afford%20to%20Live%20Here.html"
+};
 
-	  if (!query) {
-		resultsBox.style.display = "none";
-		return;
-	  }
+const searchInput = document.getElementById("navSearch");
+const resultsBox = document.getElementById("searchResults");
 
-	  Object.keys(pages).forEach(page => {
-		if (page.toLowerCase().includes(query)) {
-		  const item = document.createElement("div");
-		  item.className = "resultItem";
-		  item.textContent = page;
+let suburbs = [];
 
-		  item.onclick = () => {
-			window.location.href = pages[page];
-		  };
+// Load suburb names
+d3.csv("medHousePrice.csv").then(function(data) {
+  suburbs = data.map(d => d.Suburb);
+});
 
-		  resultsBox.appendChild(item);
-		}
-	  });
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  resultsBox.innerHTML = "";
 
-	  resultsBox.style.display = "block";
-	});
+  if (!query) {
+    resultsBox.style.display = "none";
+    return;
+  }
 
-	document.addEventListener("click", (e) => {
-	  if (!e.target.closest(".search-box")) {
-		resultsBox.style.display = "none";
-	  }
-	});
+  Object.keys(pages).forEach(page => {
+    if (page.toLowerCase().includes(query)) {
+      const item = createResultItem(page, () => {
+        window.location.href = pages[page];
+      });
+      resultsBox.appendChild(item);
+    }
+  });
+
+  suburbs
+    .filter(suburb => suburb.toLowerCase().includes(query))
+    .forEach(suburb => {
+      const item = createResultItem(suburb, () => {
+        window.location.href =
+          "suburb.html?suburb=" + encodeURIComponent(suburb);
+      });
+      resultsBox.appendChild(item);
+    });
+
+  resultsBox.style.display =
+    resultsBox.children.length > 0 ? "block" : "none";
+});
+
+function createResultItem(text, onClickAction) {
+  const item = document.createElement("div");
+  item.className = "resultItem";
+  item.textContent = text;
+  item.onclick = onClickAction;
+  return item;
+}
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-box")) {
+    resultsBox.style.display = "none";
+  }
+});
+
 	function updateClock() {
 	  const now = new Date();
 
@@ -260,6 +283,7 @@
 </body>
 
 </html>
+
 
 
 
