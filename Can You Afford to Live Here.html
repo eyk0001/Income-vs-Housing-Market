@@ -122,12 +122,12 @@
       margin: 5px 0;
       padding: 6px;
     }
-	.calculator {
+	#calculator {
 	  font-size: 24px;
 	  height: 24px;
 	  width: 256px;
 	}
-	.filters {
+	#filters {
 	  font-size: 24px;
 	  height: 24px;
 	  width: 256px;
@@ -161,24 +161,20 @@
 	</nav>
 	<h1>Can You Afford to Live Here</h1>
 	<section id="calculator">
-		<div class="calculator>
 		<input type="number" id="income" placeholder="Annual income">
 		<br>
 		<input type="number" id="price" placeholder="House price">
 		<br>
 		<button onclick="calculateAffordability()">Check</button>
-		</div>
     <p id="result"></p>
     </section>
   
     <section id="filters">
     <h2>Filters</h2>
     <select id="propertyType">
-		<div class="filters">
         <option value="house">House</option>
         <option value="unit">Unit</option>
         <option value="rent">Rent</option>
-		</div>
     </select>
     </section>
 	
@@ -266,6 +262,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
