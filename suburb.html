@@ -155,12 +155,14 @@
 	  </div>
 
 	</nav>
-	<h1> <script> 
+	 <script> 
 		const params = new URLSearchParams(window.location.search);
 		const suburbSearched = getElementByID("searchedHeader");
-		suburbSearched.textContent = params.get("suburb");
-		
-	</script><span id=("searchedHeader")></span></h1>
+		 function siteSuburb(sub) {
+		suburbSearched.textContent = sub;
+		 }
+		 siteSuburb(params.get("suburb"))
+	</script><h1>Suburb: <span id=("searchedHeader")></span></h1>
 	
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 
