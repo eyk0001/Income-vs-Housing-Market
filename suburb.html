@@ -156,12 +156,11 @@
 
 	</nav>
 	<h1> <script> 
-		return {
+		const params = new URLSearchParams(window.location.search);
+		const suburbSearched = getElementByID("searchedHeader");
+		suburbSearched.textContent = params.get("suburb");
 		
-		}
-		
-			
-	</script></h1>
+	</script><span id=("searchedHeader")></span></h1>
 	
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -267,7 +266,6 @@ d3.csv("medHousePrice.csv").then(function(data) {
         select.appendChild(option);
     });
 
-    // Create empty chart initially
     chart = new Chart(document.getElementById("myChart"), {
         type: "line",
         data: {
@@ -296,6 +294,9 @@ d3.csv("medHousePrice.csv").then(function(data) {
     });
 
 
+
+
+	
     select.addEventListener("change", function() {
 
         const selectedSuburbs = Array.from(this.selectedOptions)
