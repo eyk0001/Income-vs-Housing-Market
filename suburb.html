@@ -243,8 +243,8 @@ document.addEventListener("click", (e) => {
 
 </script>
 
-<section>
-
+<section class='split'>
+<div class='left'>
 <div id="suburbSelector">
 <label>Select Suburbs (Ctrl/Cmd + Click):</label><br>
 <select id="suburbSelect" multiple size="8" style="width:300px;"></select>
@@ -330,7 +330,7 @@ function getColor(i) {
     return `hsl(${(i * 137.5) % 360},70%,50%)`;
 }
 </script>
-
+</div>
 </section>
 </section>
 
