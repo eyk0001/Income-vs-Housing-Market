@@ -244,22 +244,39 @@ document.addEventListener("click", (e) => {
 </script>
 
 <section>
+
+<div id="suburbSelector">
 <label>Select Suburbs (Ctrl/Cmd + Click):</label><br>
 <select id="suburbSelect" multiple size="8" style="width:300px;"></select>
+</div>
 
 <canvas id="myChart"></canvas>
 
 <script>
 let chart;
 
-d3.csv("medHousePrice.csv").then(function(data) {
+const params = new URLSearchParams(window.location.search);
+const suburbFromURL = params.get("suburb");
 
-    const columns = data.columns;
-    const quarters = columns.slice(1);
-    const select = document.getElementById("searchedHeader");
+d3.csv("medHousePrice.csv").then(data => {
+
+    const quarters = data.columns.slice(1);
+    const select = document.getElementById("suburbSelect");
 
 
-    );
+    data.forEach(row => {
+        const option = new Option(row.Suburb, row.Suburb);
+
+        if (row.Suburb === suburbFromURL) {
+            option.selected = true;
+        }
+
+        select.appendChild(option);
+    });
+
+    if (suburbFromURL) {
+        document.getElementById("suburbSelector").style.display = "none";
+    }
 
     chart = new Chart(document.getElementById("myChart"), {
         type: "line",
@@ -270,58 +287,51 @@ d3.csv("medHousePrice.csv").then(function(data) {
         options: {
             responsive: true,
             plugins: {
-                legend: {
-                    display: true,
-                    position: "center",
-					margin: "400px"
-                }
+                legend: { position: "top" }
             },
             scales: {
                 y: {
                     ticks: {
-                        callback: function(value) {
-                            return "$" + value.toLocaleString();
-                        }
+                        callback: v => "$" + v.toLocaleString()
                     }
                 }
             }
         }
     });
 
+    function updateChart() {
 
+        const selected = Array.from(select.selectedOptions)
+                              .map(o => o.value);
 
-
-	
-    select.addEventListener("change", function() {
-
-        const selectedSuburbs = Array.from(this.selectedOptions)
-                                     .map(option => option.value);
-
-        const newDatasets = selectedSuburbs.map((suburb, index) => {
+        chart.data.datasets = selected.map((suburb, i) => {
             const row = data.find(d => d.Suburb === suburb);
 
             return {
                 label: suburb,
                 data: quarters.map(q => +row[q]),
-                borderColor: getColor(index),
-                backgroundColor: getColor(index),
+                borderColor: getColor(i),
+                backgroundColor: getColor(i),
                 fill: false,
                 tension: 0.2
             };
         });
 
-        chart.data.datasets = newDatasets;
         chart.update();
-    });
+    }
+
+    select.addEventListener("change", updateChart);
+
+    if (suburbFromURL) updateChart();
 
 });
 
-
-function getColor(index) {
-    const hue = (index * 137.5) % 360;
-    return `hsl(${hue}, 70%, 50%)`;
+function getColor(i) {
+    return `hsl(${(i * 137.5) % 360},70%,50%)`;
 }
 </script>
+
+</section>
 </section>
 
 </body>
