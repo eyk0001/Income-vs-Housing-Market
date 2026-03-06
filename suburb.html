@@ -156,15 +156,11 @@
 
 	</nav>
 
-	<p id="searchedHeader"></p>
-	 <script> 
-		const params = new URLSearchParams(window.location.search);
-		const suburbSearched = getElementByID("searchedHeader");
-		 function siteSuburb(sub) {
-		suburbSearched.textContent = sub;
-		 }
-		 siteSuburb(params.get("suburb"))
-	</script><h1>Suburb: <span id=("searchedHeader")></span></h1>
+	<h1><span id="searchedHeader"></span></h1>
+	 <script>
+document.getElementById("searchedHeader").textContent =
+  new URLSearchParams(window.location.search).get("suburb");
+</script>
 	
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -260,15 +256,10 @@ d3.csv("medHousePrice.csv").then(function(data) {
 
     const columns = data.columns;
     const quarters = columns.slice(1);
-    const select = document.getElementById("suburbSelect");
+    const select = document.getElementById("searchedHeader");
 
 
-    data.forEach(row => {
-        const option = document.createElement("option");
-        option.value = row.Suburb;
-        option.textContent = row.Suburb;
-        select.appendChild(option);
-    });
+    );
 
     chart = new Chart(document.getElementById("myChart"), {
         type: "line",
