@@ -165,19 +165,15 @@
 		<br>
 		<input type="number" id="price" placeholder="House price">
 		<br>
+		<select id="propertyType">
+	        <option value="house">House</option>
+	        <option value="unit">Unit</option>
+	        <option value="rent">Rent</option>
+    	</select>
 		<button onclick="calculateAffordability()">Check</button>
     <p id="result"></p>
     </section>
-  
-    <section id="filters">
-    <h2>Filters</h2>
-    <select id="propertyType">
-        <option value="house">House</option>
-        <option value="unit">Unit</option>
-        <option value="rent">Rent</option>
-    </select>
-    </section>
-	
+
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 
 <script>
@@ -262,6 +258,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
