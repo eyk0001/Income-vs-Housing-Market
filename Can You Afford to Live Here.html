@@ -165,8 +165,6 @@
 		<br>
 		<input type="number" id="income" placeholder="Annual income">
 		<br>
-		<input type="number" id="price" placeholder="House price">
-		<br>
 		<button onclick="calculateAffordability()">Check</button>
     <p id="result"></p>
     </section>
@@ -176,6 +174,7 @@
 <script>
 
 let suburbsData = [];
+let suburbs = [];
 
 d3.csv("medHousePrice.csv").then(function(data) {
   suburbsData = data;
@@ -262,62 +261,48 @@ document.addEventListener("click", (e) => {
 function calculateAffordability() {
 
   const income = parseFloat(document.getElementById("income").value);
-  const priceInput = document.getElementById("price").value;
   const suburbInput = document.getElementById("suburb").value;
 
-  if (!income) {
-    alert("Please enter your annual income.");
+  if (!income || !suburbInput) {
+    alert("Please enter both income and suburb.");
     return;
   }
 
-  let housePrice;
+  const suburbData = suburbsData.find(
+    s => s.Suburb.toLowerCase() === suburbInput.toLowerCase()
+  );
 
-  if (priceInput) {
-    housePrice = parseFloat(priceInput);
-  }
-
-  else if (suburbInput) {
-    const suburbData = suburbsData.find(
-      s => s.Suburb.toLowerCase() === suburbInput.toLowerCase()
-    );
-
-    if (!suburbData) {
-      alert("Suburb not found in dataset.");
-      return;
-    }
-
-    housePrice = parseFloat(suburbData.Q4_2023.replace(/,/g,""));
-  }
-
-  else {
-    alert("Enter either a suburb or house price. Not both...");
+  if (!suburbData) {
+    alert("Suburb not found in dataset.");
     return;
   }
 
+  const housePrice = parseFloat(suburbData.Q4_2023.replace(/,/g,""));
   const maxAffordable = income * 5;
   const ratio = housePrice / income;
 
   let result;
 
   if (ratio <= 5) {
-    result = "Affordable";
+    result = "Recommended";
   } else if (ratio <= 7) {
     result = "Plausible";
   } else {
-    result = "Not affordable";
+    result = "Not Recommended";
   }
 
   document.getElementById("result").innerHTML =
-    `House Price: $${housePrice.toLocaleString()} <br>
-     Max Affordable: $${maxAffordable.toLocaleString()} <br>
+    `Suburb: ${suburbData.Suburb} <br>
+     Median Price: $${housePrice.toLocaleString()} <br>
+     Your Max Affordable Price: $${maxAffordable.toLocaleString()} <br>
      Result: ${result}`;
 }
-
 </script>
   
 </body>
 
 </html>
+
 
 
 
