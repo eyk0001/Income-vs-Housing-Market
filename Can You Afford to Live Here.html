@@ -181,7 +181,13 @@ d3.csv("medHousePrice.csv").then(function(data) {
 
 function calculateAffordability() {
   const housePriceInput = parseFloat(document.getElementById("income").value);
+  if (suburbsData.length === 0) {
+    document.getElementById("result").textContent = "Data is still loading, please wait...";
+    return;
+  }
 
+  const housePriceInput = parseFloat(document.getElementById("income").value);
+	
   if (isNaN(housePriceInput)) {
     document.getElementById("result").textContent = "Please enter a valid house price.";
     return;
@@ -285,6 +291,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
