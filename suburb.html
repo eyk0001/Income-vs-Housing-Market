@@ -174,10 +174,13 @@
 
 	<h1><span id="searchedHeader"></span></h1>
 	 <script>
-document.getElementById("searchedHeader").textContent =
-  new URLSearchParams(window.location.search).get("suburb");
-document.getElementById("searchedHeaderText").textContent =
-  new URLSearchParams(window.location.search).get("suburb");
+  document.addEventListener("DOMContentLoaded", () => {
+  const suburb = new URLSearchParams(window.location.search).get("suburb");
+  document.getElementById("searchedHeader").textContent = suburb;
+  const textElement = document.getElementById("searchedHeaderText");
+  if (textElement) textElement.textContent = suburb;
+});
+		 
 </script>
 	
 	<script src="https://d3js.org/d3.v7.min.js"></script>
