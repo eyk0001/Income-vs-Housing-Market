@@ -175,8 +175,8 @@ let suburbsData = [];
 d3.csv("medHousePrice.csv").then(function(data) {
   console.log(data);
   suburbsData = data.map(d => ({
-    suburb: d.['Suburb'].trim(),
-    price: parseFloat(d.["Oct - Dec 2023"].replace(/[^0-9.]/g, ''))
+    suburb: d["Suburb"].trim(),
+    price: parseFloat(d["Oct - Dec 2023"].replace(/[^0-9.]/g, ''))
   }));
 });
 
@@ -285,6 +285,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
