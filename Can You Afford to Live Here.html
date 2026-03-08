@@ -175,7 +175,7 @@ let suburbsData = [];
 d3.csv("medHousePrice.csv").then(function(data) {
   suburbsData = data.map(d => ({
     suburb: d.Suburb,
-    price: parseFloat(d.MedianHousePrice.replace(/,/g, ''))
+    price: parseFloat(d.MedianHousePrice.replace(/[^0-9.]/g, ''))
   }));
 });
 
@@ -285,6 +285,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
