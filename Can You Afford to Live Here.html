@@ -162,7 +162,7 @@
 	<section id="calculator">
 		<input type="number" id="income" placeholder="House Price">
 		<br>
-		<button id="checkBtn" onclick="calculateAffordability()" disabled>Check</button>
+		<button onclick="calculateAffordability()"></button>
     <p id="result"></p>
     </section>
 
@@ -178,15 +178,10 @@ d3.csv("medHousePrice.csv").then(function(data) {
     suburb: d.['Suburb'].trim(),
     price: parseFloat(d.["Oct - Dec 2023"].replace(/[^0-9.]/g, ''))
   }));
-  document.getElementById("checkBtn").disabled = false;
 });
 
 function calculateAffordability() {
   const housePriceInput = parseFloat(document.getElementById("income").value);
-  if (suburbsData.length === 0) {
-    document.getElementById("result").textContent = "Data is still loading, please wait...";
-    return;
-  }
 	
   if (isNaN(housePriceInput)) {
     document.getElementById("result").textContent = "Please enter a valid house price.";
@@ -290,6 +285,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
