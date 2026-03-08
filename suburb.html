@@ -176,6 +176,8 @@
 	 <script>
 document.getElementById("searchedHeader").textContent =
   new URLSearchParams(window.location.search).get("suburb");
+document.getElementById("searchedHeaderText").textContent =
+  new URLSearchParams(window.location.search).get("suburb");
 </script>
 	
 	<script src="https://d3js.org/d3.v7.min.js"></script>
@@ -271,7 +273,7 @@ document.addEventListener("click", (e) => {
 	</div>
 
 	<div class="right">
-		<p>The chart illustrates how the median house price in <span id="searchedHeader"></span> changed throughout 2023, with the x-axis representing time across the four quarters of the year and the y-axis showing the median house price. The data highlights how property values fluctuated during the year, showing periods of higher and lower median prices. This provides an overview of how the housing market in the suburb performed across different parts of 2023.</p>
+		<p>The chart illustrates how the median house price in <span id="searchedHeaderText"></span> changed throughout 2023, with the x-axis representing time across the four quarters of the year and the y-axis showing the median house price. The data highlights how property values fluctuated during the year, showing periods of higher and lower median prices. This provides an overview of how the housing market in the suburb performed across different parts of 2023.</p>
 	</div>
 </section>
 
