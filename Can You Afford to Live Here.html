@@ -185,8 +185,6 @@ function calculateAffordability() {
     document.getElementById("result").textContent = "Data is still loading, please wait...";
     return;
   }
-
-  const housePriceInput = parseFloat(document.getElementById("income").value);
 	
   if (isNaN(housePriceInput)) {
     document.getElementById("result").textContent = "Please enter a valid house price.";
@@ -290,6 +288,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
