@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>About this website</title>
+	
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+	
+	
+</head>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ahom&display=swap" rel="stylesheet">
+
+<style>
+	.navbar {
+	  background: #284775;
+	  padding: 10px 20px;
+	}
+
+	.nav-row {
+	  display: flex;
+	  margin: 8px 0;
+	}
+	
+	.nav-row:not(.top-row) {
+	  justify-content: center;
+	  gap: 120px;
+	}
+
+	.top-row {
+	  align-items: center;
+	  padding: 0 40px;
+	}
+
+	.nav-left {
+	  display: flex;
+	  gap: 40px;
+	}
+	
+	.nav-center {
+	  position: absolute;
+	  left: 50%;
+	  transform: translateX(-50%);
+	}
+
+	.navbar a {
+	  color: white;
+	  text-decoration: none;
+	  font-size: 32px;
+	  font-weight: 600;
+	}
+	
+	.nav-row:last-child a {
+	  font-size: 16px;
+	}
+
+	.navbar a:hover {
+	  text-decoration: underline;
+	}
+	h1 {
+	  text-align: center;
+	  font-size: 96px;
+	}
+	h2 {
+	  text-align: center;
+	  font-size: 48px;
+	h2 {
+	  text-align: center;
+	  font-size: 24px;
+	}
+    body {
+      font-family: "Noto Serif Ahom", sans-serif;
+      margin: 0px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+	#clock {
+	    margin-left: auto;
+	    color: white;
+	    font-size: 40px;
+	    font-weight: bold;
+	    font-family: monospace;
+	}
+	.search-box {
+	position: relative;
+	}
+	#navSearch {
+	  padding: 6px 12px;
+	  font-size: 16px;
+	  height: 24px;
+	  width: 512px;
+	  border-radius: 6px;
+	  border: none;
+	  outline: none;
+	  	}
+	#searchResults {
+	  position: absolute;
+	  top: 110%;
+	  left: 0;
+	  width: 100%;
+	  background: white;
+	  border-radius: 6px;
+	  overflow: hidden;
+	  display: none;
+	  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+	  z-index: 999;
+	}
+
+	.resultItem {
+	  padding: 10px;
+	  cursor: pointer;
+	  color: black;
+	}
+
+	.resultItem:hover {
+	  background: #eee;
+	}
+    input, select, button {
+      margin: 5px 0;
+      padding: 6px;
+    }
+	.split {
+	  display: flex;
+	  gap: 40px;
+	  padding: 40px;
+	}
+
+	.left {
+	  flex: 1;
+	}
+
+	.right {
+	  flex: 1;
+	}
+	.rounded-square {
+	  margin-left: auto;
+  	  margin-right: auto;
+	  width: 700px;
+	  height: 1000px;
+	  background-color: #47C75F;
+	  border-radius: 15px;  
+	}
+	.inner-rounded-square {
+		margin-left: auto;
+  	  	margin-right: auto;
+		width: 675px;
+		height: 1000px;
+		background-color: #25502A;
+	}
+
+ </style>
+<body>
+		<nav class="navbar">
+
+	<div class="nav-row top-row">
+
+		<div class="nav-left">
+		  <a href="https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html">Home</a>
+		</div>
+
+		<div class="nav-center">
+		  <input type="text" id="navSearch" placeholder="Search Bar">
+		  <div id="searchResults"></div>
+		</div>
+
+		<div id="clock"></div>
+
+	</div>
+
+	  <div class="nav-row">
+		<a href="Price%20Growth%20vs%20Wage%20Growth.html">Price Growth vs Wage Growth</a>
+		<a href="Can%20You%20Afford%20to%20Live%20Here.html">Can You Afford to Live Here</a>
+		<a href="#">Subpage3</a>
+		<a href="#">Subpage4</a>
+	  </div>
+
+	</nav>
+	<h1>About this page</h1>
+	
+	<section class="split">
+	  <div class="left">
+		<div class="rounded-square">
+			<div class="inner-rounded-square">
+        <h2>How to use this website</h2>
+          <h3>Suburb Map</h3>
+          <body>Found on the home page, our Suburb Map gives you information on each suburb in Australia's data. Just click on a suburb and the data will come through. </body>
+          <h3>Search Bar</h3>
+          <body>Our search bar allows you to search for certain suburbs, giving you a better look at each suburbs data. You can use this to search for other subpages as well. Currently we only display data of victoria in our search bar, but hope for future to add more state suburbs.</body>
+          <h3>Housing Calculator</h3>
+          <body>Found under the can you afford to live here subpage, our housing calculator allows you to check whether your annual income meets the requirements for a certain house/unit/rent price or average suburb house/unit/rent price. Currently we only display data of victoria in our calculator, but hope for future to add more state suburbs.</body>
+			</div>
+		</div>
+	  </div>
+
+	  <div class="right">
+		<div class="rounded-square">
+			<div class="inner-rounded-square">
+        <h2>What is the purpose of this website?</h2>
+        <body>The housing market is well known for being a volatile and unpredictable environment, and a whole generation of young people are experiencing the prospect of owning a house escape from their grasp. Our website aims to provide insight into how the average person lives in each suburb of Australia (focusing on Victoria), using data on income, rent, and sales to match the best suburb for an income level.
+        The data collected provides per-suburb and per-local government area reports on median rents, property sales, average income, and percentage of private dwellings owned (outright or mortgage) versus rented. Together, this data can paint a picture of the housing market by suburb, showing which suburbs are priced at a premium vs. on sale. The majority of this data is from Q4 2023, the latest publicly available data for per-suburb information. The ABS Census occurred in 2021 and is not set to occur again until 2026, so we are limited in that sense.
+			</div>
+		</div>
+	  </div>
+	</section>
+
+<div class="rounded-square">
+			<div class="inner-rounded-square">
+        <h2>References</h2>
+        <body>2021 General Community Profile for Suburbs and Localities (SAL): Victoria. (2021). In ABS. Australian Bureau of Statistics. https://www.abs.gov.au/census/find-census-data/datapacks?release=2021&product=GCP&geography=SAL&header=S
+Rental Report - Quarterly: Quarterly Median Rents by LGA. (2014). In DataVIC. https://discover.data.vic.gov.au/dataset/rental-report-quarterly-quarterly-median-rents-by-lga
+Taxation Statistics 2022-23. (2025, April 7). Atlas.gov.au; Australian Taxation Office. https://digital.atlas.gov.au/datasets/digitalatlas::taxation-statistics-2022-23/explore?location=-25.356668%2C134.472656%2C4&showTable=true
+Victorian Property Sales Report - Median House by Suburb Quarterly - December 2023 Quarter. (2024). In DataVIC. https://web.archive.org/web/20240718210312/https://www.land.vic.gov.au/__data/assets/excel_doc/0023/706334/median-house-q4-2023.xls
+			</div>
+		</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script>
+const pages = {
+  "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
+  "Price Growth vs Wage Growth": "https://eyk0001.github.io/Income-vs-Housing-Market/Price%20Growth%20vs%20Wage%20Growth.html",
+  "Can You Afford to Live Here": "https://eyk0001.github.io/Income-vs-Housing-Market/Can%20You%20Afford%20to%20Live%20Here.html"
+  "About this website": "https://eyk0001.github.io/Income-vs-Housing-Market/About%20this%20website%20.html"
+};
+
+const searchInput = document.getElementById("navSearch");
+const resultsBox = document.getElementById("searchResults");
+
+let suburbs = [];
+
+// Load suburb names
+d3.csv("medHousePrice.csv").then(function(data) {
+  suburbs = data.map(d => d.Suburb);
+});
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  resultsBox.innerHTML = "";
+
+  if (!query) {
+    resultsBox.style.display = "none";
+    return;
+  }
+
+  Object.keys(pages).forEach(page => {
+    if (page.toLowerCase().includes(query)) {
+      const item = createResultItem(page, () => {
+        window.location.href = pages[page];
+      });
+      resultsBox.appendChild(item);
+    }
+  });
+
+  suburbs
+    .filter(suburb => suburb.toLowerCase().includes(query))
+    .forEach(suburb => {
+      const item = createResultItem(suburb, () => {
+        window.location.href =
+          "suburb.html?suburb=" + encodeURIComponent(suburb);
+      });
+      resultsBox.appendChild(item);
+    });
+
+  resultsBox.style.display =
+    resultsBox.children.length > 0 ? "block" : "none";
+});
+
+function createResultItem(text, onClickAction) {
+  const item = document.createElement("div");
+  item.className = "resultItem";
+  item.textContent = text;
+  item.onclick = onClickAction;
+  return item;
+}
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-box")) {
+    resultsBox.style.display = "none";
+  }
+});
+
+	function updateClock() {
+	  const now = new Date();
+
+	  const hours = String(now.getHours()).padStart(2, '0');
+	  const minutes = String(now.getMinutes()).padStart(2, '0');
+	  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+	  document.getElementById("clock").textContent =
+		`${hours}:${minutes}:${seconds}`;
+	}
+
+	setInterval(updateClock, 1000);
+	updateClock();
+
+</script>
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
