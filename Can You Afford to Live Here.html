@@ -298,6 +298,12 @@ function calculateAffordability() {
      Result: ${result}`;
 }
 
+document.getElementById("suburb").addEventListener("change", () => {
+  const suburbValue = document.getElementById("suburb").value;
+  if (suburbs.includes(suburbValue)) {
+    calculateAffordability();
+  }
+});
 
 d3.csv("medHousePrice.csv").then(function(data) {
   suburbsData = data;
@@ -315,6 +321,7 @@ d3.csv("medHousePrice.csv").then(function(data) {
 </body>
 
 </html>
+
 
 
 
