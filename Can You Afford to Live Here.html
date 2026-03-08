@@ -162,7 +162,7 @@
 	<section id="calculator">
 		<input type="number" id="income" placeholder="House Price">
 		<br>
-		<button onclick="calculateAffordability()">Check</button>
+		<button id="checkBtn" onclick="calculateAffordability()" disabled>Check</button>
     <p id="result"></p>
     </section>
 
@@ -173,10 +173,12 @@
 let suburbsData = [];
 
 d3.csv("medHousePrice.csv").then(function(data) {
+  console.log(data);
   suburbsData = data.map(d => ({
     suburb: d.Suburb,
     price: parseFloat(d.MedianHousePrice.replace(/[^0-9.]/g, ''))
   }));
+  document.getElementById("checkBtn").disabled = false;
 });
 
 function calculateAffordability() {
@@ -288,6 +290,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
