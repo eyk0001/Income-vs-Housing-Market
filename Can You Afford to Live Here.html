@@ -169,6 +169,40 @@
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 
 <script>
+
+let suburbsData = [];
+
+d3.csv("medHousePrice.csv").then(function(data) {
+  suburbsData = data.map(d => ({
+    suburb: d.Suburb,
+    price: parseFloat(d.MedianHousePrice.replace(/,/g, ''))
+  }));
+});
+
+function calculateAffordability() {
+  const housePriceInput = parseFloat(document.getElementById("income").value);
+
+  if (isNaN(housePriceInput)) {
+    document.getElementById("result").textContent = "Please enter a valid house price.";
+    return;
+  }
+
+
+  const affordableSuburbs = suburbsData
+    .filter(d => d.price <= housePriceInput)
+    .sort((a, b) => b.price - a.price); // descending order
+
+  if (affordableSuburbs.length === 0) {
+    document.getElementById("result").textContent = "No suburbs found within this price range.";
+    return;
+  }
+
+  const list = affordableSuburbs.map(d => `${d.suburb} - $${d.price.toLocaleString()}`).join("\n");
+  document.getElementById("result").textContent = list;
+}
+
+
+	
 const pages = {
   "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
   "About this website": "https://eyk0001.github.io/Income-vs-Housing-Market/About%20this%20website.html",
@@ -256,6 +290,7 @@ function calculateAffordability() {
 </body>
 
 </html>
+
 
 
 
