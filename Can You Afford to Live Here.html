@@ -209,6 +209,11 @@ function calculateAffordability() {
 }
 
 
+
+
+
+
+	
 	
 const pages = {
   "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
@@ -218,12 +223,6 @@ const pages = {
 
 const searchInput = document.getElementById("navSearch");
 const resultsBox = document.getElementById("searchResults");
-
-let suburbs = [];
-
-d3.csv("medHousePrice.csv").then(function(data) {
-  suburbs = data.map(d => d.Suburb);
-});
 
 searchInput.addEventListener("input", () => {
   const query = searchInput.value.toLowerCase().trim();
@@ -291,6 +290,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
