@@ -161,7 +161,9 @@
 	<h2>Housing Calculator</h2>
 	<p>Enter either a suburb or a house price to get an instant and automatic estimate from your annual income.</p>
 	<section id="calculator">
-		<input type="search" id="suburb" placeholder="Suburb">
+		<label for="suburb">Suburb:</label>
+		<input type="text" id="suburb" placeholder="Enter suburb" list="suburb-list">
+		<datalist id="suburb-list"></datalist>
 		<br>
 		<input type="number" id="income" placeholder="Annual income">
 		<br>
@@ -297,11 +299,25 @@ function calculateAffordability() {
      Your Max Affordable Price: $${maxAffordable.toLocaleString()} <br>
      Result: ${result}`;
 }
+
+
+d3.csv("medHousePrice.csv").then(function(data) {
+  suburbsData = data;
+  suburbs = data.map(d => d.Suburb);
+
+  const dataList = document.getElementById("suburb-list");
+  suburbs.forEach(sub => {
+    const option = document.createElement("option");
+    option.value = sub;
+    dataList.appendChild(option);
+  });
+});
 </script>
   
 </body>
 
 </html>
+
 
 
 
