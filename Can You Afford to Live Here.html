@@ -172,15 +172,6 @@
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 
 <script>
-
-let suburbsData = [];
-let suburbs = [];
-
-d3.csv("medHousePrice.csv").then(function(data) {
-  suburbsData = data;
-  suburbs = data.map(d => d.Suburb);
-});
-
 const pages = {
   "Home": "https://eyk0001.github.io/Income-vs-Housing-Market/Income%20vs%20housing%20market.html",
   "About this website": "https://eyk0001.github.io/Income-vs-Housing-Market/About%20this%20website.html",
@@ -263,64 +254,12 @@ function calculateAffordability() {
   const income = parseFloat(document.getElementById("income").value);
   const suburbInput = document.getElementById("suburb").value;
 
-  if (!income || !suburbInput) {
-    alert("Please enter both income and suburb.");
-    return;
-  }
-
-  const suburbData = suburbsData.find(
-    s => s.Suburb.toLowerCase() === suburbInput.toLowerCase()
-  );
-
-  if (!suburbData) {
-    alert("Suburb not found in dataset.");
-    return;
-  }
-
-  const housePrice = parseFloat(suburbData.Q4_2023.replace(/,/g,""));
-  const maxAffordable = income * 5;
-  const ratio = housePrice / income;
-
-  let result;
-
-  if (ratio <= 5) {
-    result = "Recommended";
-  } else if (ratio <= 7) {
-    result = "Plausible";
-  } else {
-    result = "Not Recommended";
-  }
-
-  document.getElementById("result").innerHTML =
-    `Suburb: ${suburbData.Suburb} <br>
-     Median Price: $${housePrice.toLocaleString()} <br>
-     Your Max Affordable Price: $${maxAffordable.toLocaleString()} <br>
-     Result: ${result}`;
-}
-
-document.getElementById("suburb").addEventListener("change", () => {
-  const suburbValue = document.getElementById("suburb").value;
-  if (suburbs.includes(suburbValue)) {
-    calculateAffordability();
-  }
-});
-
-d3.csv("medHousePrice.csv").then(function(data) {
-  suburbsData = data;
-  suburbs = data.map(d => d.Suburb);
-
-  const dataList = document.getElementById("suburb-list");
-  suburbs.forEach(sub => {
-    const option = document.createElement("option");
-    option.value = sub;
-    dataList.appendChild(option);
-  });
-});
 </script>
   
 </body>
 
 </html>
+
 
 
 
