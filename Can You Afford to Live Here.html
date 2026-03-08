@@ -187,10 +187,9 @@ function calculateAffordability() {
     return;
   }
 
-
   const affordableSuburbs = suburbsData
     .filter(d => d.price <= housePriceInput)
-    .sort((a, b) => b.price - a.price); // descending order
+    .sort((a, b) => b.price - a.price);
 
   if (affordableSuburbs.length === 0) {
     document.getElementById("result").textContent = "No suburbs found within this price range.";
@@ -284,6 +283,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
