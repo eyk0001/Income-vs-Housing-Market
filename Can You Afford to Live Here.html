@@ -196,8 +196,10 @@ function calculateAffordability() {
     return;
   }
 
-  const list = affordableSuburbs.map(d => `${d.suburb} - $${d.price.toLocaleString()}`).join("\n");
-  document.getElementById("result").textContent = list;
+  const list = affordableSuburbs
+	  .map(d => `${d.suburb} - $${d.price.toLocaleString()}`)
+	  .join("<br>");
+  document.getElementById("result").innerHTML = list;
 }
 
 
@@ -283,6 +285,7 @@ document.addEventListener("click", (e) => {
 </body>
 
 </html>
+
 
 
 
