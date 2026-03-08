@@ -184,7 +184,6 @@ const resultsBox = document.getElementById("searchResults");
 
 let suburbs = [];
 
-// Load suburb names
 d3.csv("medHousePrice.csv").then(function(data) {
   suburbs = data.map(d => d.Suburb);
 });
@@ -249,11 +248,68 @@ document.addEventListener("click", (e) => {
 	setInterval(updateClock, 1000);
 	updateClock();
 
+
+
+function calculateAffordability() {
+
+  const income = parseFloat(document.getElementById("income").value);
+  const priceInput = document.getElementById("price").value;
+  const suburbInput = document.getElementById("suburb").value;
+
+  if (!income) {
+    alert("Please enter your annual income.");
+    return;
+  }
+
+  let housePrice;
+
+  if (priceInput) {
+    housePrice = parseFloat(priceInput);
+  }
+
+  else if (suburbInput) {
+    const suburbData = suburbsData.find(
+      s => s.Suburb.toLowerCase() === suburbInput.toLowerCase()
+    );
+
+    if (!suburbData) {
+      alert("Suburb not found in dataset.");
+      return;
+    }
+
+    housePrice = parseFloat(suburbData.Q4_2023.replace(/,/g,""));
+  }
+
+  else {
+    alert("Enter either a suburb or house price. Not both...");
+    return;
+  }
+
+  const maxAffordable = income * 5;
+  const ratio = housePrice / income;
+
+  let result;
+
+  if (ratio <= 5) {
+    result = "Affordable";
+  } else if (ratio <= 7) {
+    result = "Plausible";
+  } else {
+    result = "Not affordable";
+  }
+
+  document.getElementById("result").innerHTML =
+    `House Price: $${housePrice.toLocaleString()} <br>
+     Max Affordable: $${maxAffordable.toLocaleString()} <br>
+     Result: ${result}`;
+}
+
 </script>
   
 </body>
 
 </html>
+
 
 
 
